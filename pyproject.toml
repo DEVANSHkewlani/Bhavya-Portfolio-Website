@@ -1,0 +1,9 @@
+[project]
+name = "bhavya-portfolio"
+version = "1.0.0"
+dependencies = [
+    "resend>=2.5.1"
+]
+
+[tool.vercel]
+entrypoint = "api.contact:handler"

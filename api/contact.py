@@ -1,3 +1,5 @@
+from trio import _subprocess_platform
+from trio import _subprocess_platform
 import os
 import json
 import time
@@ -22,7 +24,8 @@ class handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self._cors_headers()
         self.end_headers()
-
+    def do_GET(self):
+        self._respond(404, {"error": "Not found"})
     def do_POST(self):
         # --- RATE LIMITING ---
         # x-forwarded-for is the real client IP when behind Vercel's proxy
