@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>about. — bhavya shukla.</title>
+  <meta name="description"
+    content="About Bhavya Shukla — BJMC Student at MAHE Bengaluru, Entertainment Marketing, Hosting &amp; Content Production." />
+  <meta property="og:title" content="About — Bhavya" />
+  <meta property="og:description"
+    content="About Bhavya — BJMC Student at MAHE Bengaluru, Entertainment Marketing, Hosting &amp; Content Production" />
+  <meta property="og:image" content="https://films.work/images/hero.jpg" />
+  <meta property="og:url" content="https://films.work/about" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── RESET BACKGROUNDS ON ABOUT PAGE SO 3D CANVAS SHOWS THROUGH ── */
+    html {
+      background-color: var(--bg-color);
+    }
+
+    body.about-body {
+      background: transparent !important;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* ── FIXED 3D CANVAS (z-index: 1) ── */
+    #camera-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw !important;
+      height: 100vh !important;
+      z-index: 1;
+      pointer-events: none;
+      display: block;
+    }
+
+    /* ── AMBIENT GLASS / GRADIENT OVERLAY (z-index: 2) ── */
+    #glass-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      transition: background 0.4s ease;
+    }
+
+    /* Light mode: subtle off-white vignette on left to keep text ultra-legible */
+    :root:not([data-theme="dark"]) #glass-overlay,
+    [data-theme="light"] #glass-overlay {
+      background: linear-gradient(to right,
+          rgba(244, 242, 235, 0.92) 0%,
+          rgba(244, 242, 235, 0.75) 35%,
+          rgba(244, 242, 235, 0.25) 60%,
+          rgba(244, 242, 235, 0.0) 100%);
+    }
+
+    /* Dark mode: soft cinema-dark vignette on left */
+    [data-theme="dark"] #glass-overlay {
+      background: linear-gradient(to right,
+          rgba(0, 0, 0, 0.85) 0%,
+          rgba(0, 0, 0, 0.55) 38%,
+          rgba(0, 0, 0, 0.15) 65%,
+          rgba(0, 0, 0, 0.0) 100%);
+    }
+
+    /* ── SCROLLABLE CONTENT WRAPPER (z-index: 10) ── */
+    .about-page-wrap {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      pointer-events: auto;
+    }
+
+    /* Make all about sections transparent */
+    .about-body .m-section {
+      background: transparent !important;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-bottom: 1px solid var(--border-line);
+      pointer-events: auto;
+    }
+
+    .about-body .m-section-inner {
+      background: transparent !important;
+      min-height: 100vh;
+    }
+
+    /* Content column: spans left 6 of 12 columns so camera commands right side */
+    .ab-content-col {
+      grid-column: 2 / 7;
+      border-left: 1px solid var(--border-line);
+      border-right: 1px solid var(--border-line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0;
+      height: 100%;
+      background: transparent !important;
+    }
+
+    /* Pull section 1 header down cleanly below fixed navbar */
+    #ab-s1 .sec-header {
+      padding-top: calc(var(--nav-h) + 1.4rem);
+    }
+
+    /* Typography */
+    .ab-hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(4.5rem, 9vw, 8.5rem);
+      font-weight: 800;
+      line-height: 0.88;
+      letter-spacing: -0.05em;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .ab-hero-name em {
+      font-style: normal;
+      color: var(--text-primary);
+      opacity: 1;
+    }
+
+    .ab-hero-sub {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 1.8rem;
+    }
+
+    .ab-statement {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+      padding: clamp(2rem, 4vh, 3.5rem) clamp(1.5rem, 2.5vw, 2.5rem);
+      border-bottom: 1px solid var(--border-line);
+    }
+
+    .ab-one-line {
+      font-size: clamp(0.92rem, 1.25vw, 1.05rem);
+      line-height: 1.85;
+      color: var(--text-muted);
+      padding: clamp(1.5rem, 3vh, 2.5rem) clamp(1.5rem, 2.5vw, 2.5rem);
+    }
+
+    .ab-cta-row {
+      border-top: 1px solid var(--border-line);
+      padding: clamp(1.2rem, 2.5vh, 2rem) clamp(1.5rem, 2.5vw, 2.5rem);
+    }
+
+    .ab-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      border: 1px solid var(--border-line);
+      padding: 0.85rem 1.8rem;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+
+    .ab-cta:hover {
+      background: var(--card-bg);
+      border-color: var(--text-primary);
+      transform: translateX(4px);
+    }
+
+    .ab-quote-big {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      font-style: italic;
+      color: var(--text-primary);
+      border-left: 4px solid var(--accent-color);
+      padding: clamp(2rem, 4vh, 3rem) clamp(1.5rem, 2.5vw, 2.5rem);
+      border-bottom: 1px solid var(--border-line);
+    }
+
+    .ab-quote-attr {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: clamp(1rem, 2vh, 1.5rem) clamp(1.5rem, 2.5vw, 2.5rem);
+      border-bottom: 1px solid var(--border-line);
+    }
+
+    /* ── SCROLL INDICATOR (z-index: 20) ── */
+    #scroll-indicator {
+      position: fixed;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .si-label {
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      margin: 0;
+    }
+
+    #si-track {
+      width: 1px;
+      height: 180px;
+      background: var(--border-line);
+      position: relative;
+    }
+
+    #si-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent-color);
+      position: absolute;
+      left: -4px;
+      top: 0%;
+      transition: top 0.15s ease-out;
+      box-shadow: 0 0 10px rgba(122, 21, 25, 0.6);
+    }
+
+    .si-tick {
+      position: absolute;
+      left: -3px;
+      width: 7px;
+      height: 1px;
+      background: var(--border-line);
+    }
+
+    @media (max-width: 900px) {
+      #scroll-indicator {
+        display: none;
+      }
+
+      .ab-content-col {
+        grid-column: 2 / 12;
+      }
+
+      .ab-hero-name {
+        font-size: clamp(3.5rem, 12vw, 6rem);
+      }
+
+      #glass-overlay {
+        background: var(--bg-color) !important;
+        opacity: 0.85;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .ab-content-col {
+        grid-column: 1 / 13;
+        border-left: none;
+        border-right: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="about-body">
+
+  <!-- 3D CAMERA CANVAS -->
+  <canvas id="camera-canvas" aria-hidden="true"></canvas>
+
+  <!-- GLASS TINT OVERLAY -->
+  <div id="glass-overlay" aria-hidden="true"></div>
+
+  <!-- SCROLL PROGRESS INDICATOR -->
+  <div id="scroll-indicator" aria-hidden="true">
+    <p class="si-label">macro</p>
+    <div id="si-track">
+      <div id="si-dot"></div>
+      <div class="si-tick" style="top:0%"></div>
+      <div class="si-tick" style="top:33%"></div>
+      <div class="si-tick" style="top:66%"></div>
+      <div class="si-tick" style="top:100%"></div>
+    </div>
+    <p class="si-label">front</p>
+  </div>
+
+  <!-- PAGE WRAPPER — scrolls above 3D scene -->
+  <div class="about-page-wrap">
+
+    <!-- 12-COLUMN BACKGROUND GRID -->
+    <div class="grid-lines-bg" aria-hidden="true" style="opacity:0.35;">
+      <div class="grid-line-col"></div>
+      <div class="grid-line-col"></div>
+      <div class="grid-line-col"></div>
+      <div class="grid-line-col"></div>
+      <div class="grid-line-col"></div>
+      <div class="grid-line-col"></div>
+      <div class="grid-line-col"></div>
+      <div class="grid-line-col"></div>
+      <div class="grid-line-col"></div>
+      <div class="grid-line-col"></div>
+      <div class="grid-line-col"></div>
+      <div class="grid-line-col"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header id="header">
+      <div class="header-logo-box"><a href="index.html" class="header-logo">bhavya.</a></div>
+      <div class="header-ticker-box">
+        <div class="ticker-track">
+          <span class="ticker-item active">LIGHTS</span><span class="ticker-item">/</span><span
+            class="ticker-item">CAMERA</span><span class="ticker-item">/</span><span
+            class="ticker-item">ACTION</span><span class="ticker-space"></span>
+          <span class="ticker-item active">LIGHTS</span><span class="ticker-item">/</span><span
+            class="ticker-item">CAMERA</span><span class="ticker-item">/</span><span
+            class="ticker-item">ACTION</span><span class="ticker-space"></span>
+          <span class="ticker-item active">LIGHTS</span><span class="ticker-item">/</span><span
+            class="ticker-item">CAMERA</span><span class="ticker-item">/</span><span
+            class="ticker-item">ACTION</span><span class="ticker-space"></span>
+          <span class="ticker-item active">LIGHTS</span><span class="ticker-item">/</span><span
+            class="ticker-item">CAMERA</span><span class="ticker-item">/</span><span
+            class="ticker-item">ACTION</span><span class="ticker-space"></span>
+        </div>
+      </div>
+      <button type="button" id="theme-toggle" class="header-theme-toggle" aria-label="Toggle light/dark theme">
+        <span id="theme-text">LIGHT</span><span class="theme-square"></span>
+      </button>
+      <button type="button" id="menu-btn" class="header-menu-btn" aria-label="Toggle navigation drawer">
+        <div class="menu-burger-lines"><span></span><span></span><span></span></div>
+      </button>
+    </header>
+
+    <!-- NAV DRAWER (HALF PREVIEW / HALF MENU) -->
+    <div id="nav-drawer" role="dialog" aria-modal="true" aria-label="Site Navigation">
+      <!-- LEFT HALF: DYNAMIC IMAGE STAGE WITH BLUR/CROSSFADE TRANSITIONS -->
+      <div class="drawer-preview-stage">
+        <div class="drawer-preview-backdrop"></div>
+        <div class="drawer-preview-layer" data-preview="home">
+          <img src="images/hero.jpg" alt="Home preview" class="drawer-preview-img" />
+          <div class="drawer-preview-tag"><span>01</span> / HOME // MEDIA, HOSTING &amp; PRODUCTION</div>
+        </div>
+        <div class="drawer-preview-layer active" data-preview="about">
+          <img src="images/about_portrait_1791400145203.jpg" alt="Bhavya Shukla portrait" class="drawer-preview-img" />
+          <div class="drawer-preview-tag"><span>02</span> / ABOUT // BJMC STUDENT &amp; ANCHOR</div>
+        </div>
+        <div class="drawer-preview-layer" data-preview="works">
+          <img src="images/work1.jpg" alt="Selected Works still" class="drawer-preview-img" />
+          <div class="drawer-preview-tag"><span>03</span> / WORKS // SHORT FILMS &amp; PARODIES</div>
+        </div>
+        <div class="drawer-preview-layer" data-preview="experience">
+          <img src="images/project1_img_1791400184057.jpg" alt="Experience on set" class="drawer-preview-img" />
+          <div class="drawer-preview-tag"><span>04</span> / EXPERIENCE // RED FM, BHARAT SAMACHAR &amp; EVENTS</div>
+        </div>
+        <div class="drawer-preview-layer" data-preview="achievements">
+          <!-- Crossfading multi-image montage with blur transition -->
+          <div class="drawer-slideshow" id="drawer-achieve-slideshow">
+            <img src="images/still1.jpg" alt="Award Still 1" class="drawer-slide-img active" />
+            <img src="images/still2.jpg" alt="Award Still 2" class="drawer-slide-img" />
+            <img src="images/still3.jpg" alt="Award Still 3" class="drawer-slide-img" />
+            <img src="images/still4.jpg" alt="Award Still 4" class="drawer-slide-img" />
+            <img src="images/still5.jpg" alt="Award Still 5" class="drawer-slide-img" />
+          </div>
+          <div class="drawer-preview-tag"><span>05</span> / HONORS // MAHE 9.6 CGPA &amp; UP GOV FELICITATION</div>
+        </div>
+        <div class="drawer-preview-layer" data-preview="contact">
+          <img src="images/hero_portrait_1791400132911.jpg" alt="Contact Bhavya" class="drawer-preview-img" />
+          <div class="drawer-preview-tag"><span>06</span> / CONTACT // INQUIRIES &amp; COLLABORATIONS</div>
+        </div>
+      </div>
+
+      <!-- RIGHT HALF: MENU CONTROLS & LINKS -->
+      <div class="drawer-content-stage">
+        <ul class="drawer-links">
+          <li><a href="index.html" data-menu-target="home"><span class="nav-num">01</span><span
+                class="nav-text">home.</span></a></li>
+          <li><a href="about.html" data-menu-target="about"><span class="nav-num">02</span><span
+                class="nav-text">about.</span></a></li>
+          <li><a href="works.html" data-menu-target="works"><span class="nav-num">03</span><span
+                class="nav-text">works.</span></a></li>
+          <li><a href="experience.html" data-menu-target="experience"><span class="nav-num">04</span><span
+                class="nav-text">experience.</span></a></li>
+          <li><a href="achievements.html" data-menu-target="achievements"><span class="nav-num">05</span><span
+                class="nav-text">achievements.</span></a></li>
+          <li><a href="contact.html" data-menu-target="contact"><span class="nav-num">06</span><span
+                class="nav-text">contact.</span></a></li>
+        </ul>
+        <div class="drawer-footer">
+          <span>AVAILABLE FOR ROLES &amp; PROJECTS 2026</span>
+          <span>bhavya.tia@gmail.com</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 1 — HERO -->
+    <section class="m-section" id="ab-s1">
+      <div class="m-section-inner">
+        <div class="ab-content-col">
+          <div class="sec-header">
+            <p class="sec-eyebrow">writing&nbsp;·&nbsp; directing &nbsp;·&nbsp; hosting &nbsp;·&nbsp; content production
+            </p>
+          </div>
+          <div
+            style="padding: clamp(2rem,5vh,5rem) clamp(1.5rem,2.5vw,2.5rem); flex:1; display:flex; flex-direction:column; justify-content:center;">
+            <h1 class="ab-hero-name">bha<em>v</em>ya shukla.</h1>
+            <p class="ab-hero-sub">BJMC @ Manipal Academy of Higher Education, Bengaluru &nbsp;&middot;&nbsp; CGPA: 9.6
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2 — ABOUT -->
+    <section class="m-section" id="ab-s2">
+      <div class="m-section-inner">
+        <div class="ab-content-col">
+          <div class="sec-header">
+            <p class="sec-eyebrow">biography</p>
+            <h2 class="sec-h2">about.</h2>
+          </div>
+          <p class="ab-statement">
+            Bridging entertainment marketing, on-camera hosting, broadcast media, and visual storytelling.
+          </p>
+          <p class="ab-one-line">
+            BJMC student at Manipal Academy of Higher Education with hands-on experience across radio, film,
+            television-style production and digital content. Experienced emcee and anchor (felicitated by the Governor
+            of Uttar Pradesh), founder of DLHS MAHE’s student entertainment community TAMASHA, and head of Band Baaja
+            Baaraat which drew 1,800+ attendees.
+          </p>
+          <div class="ab-cta-row">
+            <a href="works.html" class="ab-cta">View Productions &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3 — PHILOSOPHY -->
+    <section class="m-section" id="ab-s3">
+      <div class="m-section-inner">
+        <div class="ab-content-col">
+          <div class="sec-header">
+            <p class="sec-eyebrow">vision &amp; craft</p>
+            <h2 class="sec-h2">philosophy.</h2>
+          </div>
+          <p class="ab-quote-big">
+            "Audience connection isn't accidental, it's built where high-energy presentation meets meticulous
+            production craft."
+          </p>
+          <p class="ab-quote-attr">&mdash; On media, acting &amp; production</p>
+          <p class="ab-one-line">
+            From show production and digital editing at RED FM India to news research at Bharat Samachar, directing
+            short films, and hosting mega campus arenas, every medium is a canvas for authentic, memorable
+            communication.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER (CLASSIC DARK LUXURY FOOTER WITH REFINED BOTTOM STRIP) -->
+    <footer id="site-footer">
+      <div class="footer-nav-grid">
+        <a href="about.html" class="footer-nav-cell">ABOUT</a>
+        <a href="works.html" class="footer-nav-cell">WORKS</a>
+        <a href="contact.html" class="footer-nav-cell">CONTACT</a>
+      </div>
+      <div class="footer-middle-grid">
+        <div class="footer-middle-left">
+          <p class="footer-subhead">ELSEWHERE</p>
+          <div class="footer-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-link">INSTAGRAM
+              &rarr;</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-link">YOUTUBE &rarr;</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" class="footer-social-link">LINKEDIN &rarr;</a>
+          </div>
+        </div>
+        <div class="footer-middle-right">
+          <p class="footer-subhead">COLOPHON</p>
+          <p style="font-size: 0.78rem; opacity: 0.8; line-height: 1.7;">
+            &copy; 2026 BHAVYA SHUKLA. ALL RIGHTS RESERVED.<br>
+            MAHE BENGALURU &middot; BJMC (CGPA: 9.6)
+          </p>
+          <div class="footer-action-links">
+            <a href="Bhavya_Shukla_CV.pdf" download="Bhavya_Shukla_CV.pdf" id="download-cv" class="footer-action-link"
+              aria-label="Download Bhavya Shukla CV">&darr; DOWNLOAD CV</a>
+            <a href="https://1drv.ms/f/c/all-content" target="_blank" rel="noopener noreferrer" id="onedrive-link" class="footer-action-link"
+              aria-label="View all media, videos and content archive on OneDrive">&nearr; ONEDRIVE ARCHIVE</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-big-crop-wrap">
+        <div class="footer-crowd-canvas-wrap" aria-hidden="true"></div>
+      </div>
+    </footer>
+
+  </div><!-- /about-page-wrap -->
+
+  <!-- THREE.JS (r128 CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- MAIN APP SCRIPT -->
+  <script src="data/content.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/footer-bhavya.js"></script>
+  <script src="js/footer-crowd.js"></script>
+
+  <!-- 3D SCROLL CAMERA ENGINE (HOLLOW ILLUSTRATION / BLUEPRINT STYLE) -->
+  <script>
+    (function () {
+      'use strict';
+
+      if (typeof THREE === 'undefined') {
+        console.error('Three.js failed to load');
+        return;
+      }
+
+      // 1. SCENE SETUP
+      var scene = new THREE.Scene();
+      scene.background = null;
+
+      var canvas = document.getElementById('camera-canvas');
+      var renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: true,
+        powerPreference: 'high-performance'
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      // 2. CAMERA SETUP
+      var camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0.6, 0.4, 5.0);
+
+      // 3. THEME-ADAPTIVE MATERIALS
+      var isDarkInitial = document.documentElement.dataset.theme === 'dark';
+
+      var mainLineMat = new THREE.LineBasicMaterial({
+        color: isDarkInitial ? 0xf4f2eb : 0x050505,
+        transparent: true,
+        opacity: isDarkInitial ? 0.88 : 0.78,
+        linewidth: 1.5
+      });
+
+      var faintLineMat = new THREE.LineBasicMaterial({
+        color: isDarkInitial ? 0xf4f2eb : 0x050505,
+        transparent: true,
+        opacity: isDarkInitial ? 0.35 : 0.28,
+        linewidth: 1
+      });
+
+      var accentLineMat = new THREE.LineBasicMaterial({
+        color: isDarkInitial ? 0x79a9e8 : 0x050505,
+        transparent: true,
+        opacity: 0.95,
+        linewidth: 2
+      });
+
+      var ghostFaceMat = new THREE.MeshBasicMaterial({
+        color: isDarkInitial ? 0xffffff : 0x050505,
+        transparent: true,
+        opacity: isDarkInitial ? 0.035 : 0.02,
+        depthWrite: false,
+        side: THREE.DoubleSide
+      });
+
+      var hudLineMat = new THREE.LineBasicMaterial({
+        color: isDarkInitial ? 0x79a9e8 : 0x050505,
+        transparent: true,
+        opacity: isDarkInitial ? 0.75 : 0.65,
+        linewidth: 1
+      });
+
+      // Helper: Create hollow wire-edge geometry with subtle translucent inner volume
+      function wirePart(geo, lineMaterial, threshold) {
+        var grp = new THREE.Group();
+        var faceMesh = new THREE.Mesh(geo, ghostFaceMat);
+        grp.add(faceMesh);
+        var edges = new THREE.EdgesGeometry(geo, threshold !== undefined ? threshold : 20);
+        var wire = new THREE.LineSegments(edges, lineMaterial || mainLineMat);
+        grp.add(wire);
+        return grp;
+      }
+
+      // Helper: Create clean single-pixel vector circle (no cross seams or spiderweb lines)
+      function createVectorCircle(radius, lineMaterial, zPos) {
+        var points = [];
+        var segments = 48;
+        for (var i = 0; i <= segments; i++) {
+          var theta = (i / segments) * Math.PI * 2;
+          points.push(new THREE.Vector3(Math.cos(theta) * radius - 0.1, Math.sin(theta) * radius - 0.08, zPos));
+        }
+        var geo = new THREE.BufferGeometry().setFromPoints(points);
+        return new THREE.Line(geo, lineMaterial);
+      }
+
+      // 4. CLEAN HOLLOW ILLUSTRATION CAMERA MODEL (MINIMALIST VECTOR BLUEPRINT)
+      function createHollowCamera() {
+        var cameraGroup = new THREE.Group();
+        var bodyCoreGroup = new THREE.Group();
+        var topRailGroup = new THREE.Group();
+        var baseRailGroup = new THREE.Group();
+        var gripBodyGroup = new THREE.Group();
+        var gripFrontGroup = new THREE.Group();
+        var viewfinderGroup = new THREE.Group();
+        var hotShoeGroup = new THREE.Group();
+        var modeDialGroup = new THREE.Group();
+        var shutterGroup = new THREE.Group();
+        var lensMountGroup = new THREE.Group();
+        var lensBarrelGroup = new THREE.Group();
+        var lensFrontGroup = new THREE.Group();
+        var rearViewfinderGroup = new THREE.Group();
+        var lcdGroup = new THREE.Group();
+        var rearControlsGroup = new THREE.Group();
+
+        bodyCoreGroup.name = 'camera-body-core';
+        topRailGroup.name = 'camera-top-rail';
+        baseRailGroup.name = 'camera-base-rail';
+        gripBodyGroup.name = 'camera-grip-body';
+        gripFrontGroup.name = 'camera-grip-front';
+        viewfinderGroup.name = 'camera-viewfinder-hump';
+        hotShoeGroup.name = 'camera-hot-shoe';
+        modeDialGroup.name = 'camera-mode-dial';
+        shutterGroup.name = 'camera-shutter';
+        lensMountGroup.name = 'camera-lens-mount';
+        lensBarrelGroup.name = 'camera-lens-barrel';
+        lensFrontGroup.name = 'camera-lens-front';
+        rearViewfinderGroup.name = 'camera-rear-viewfinder';
+        lcdGroup.name = 'camera-lcd';
+        rearControlsGroup.name = 'camera-rear-controls';
+
+        // --- MAIN CAMERA BODY CHASSIS ---
+        var chassis = wirePart(new THREE.BoxGeometry(2.35, 1.55, 1.15), mainLineMat, 15);
+        bodyCoreGroup.add(chassis);
+
+        // Top & Base accent lines
+        var topChamfer = wirePart(new THREE.BoxGeometry(2.3, 0.06, 1.1), faintLineMat, 15);
+        topChamfer.position.set(0, 0.8, 0);
+        topRailGroup.add(topChamfer);
+
+        var baseChamfer = wirePart(new THREE.BoxGeometry(2.3, 0.06, 1.1), faintLineMat, 15);
+        baseChamfer.position.set(0, -0.8, 0);
+        baseRailGroup.add(baseChamfer);
+
+        // --- ERGONOMIC HAND GRIP (Clean contour) ---
+        var gripBody = wirePart(new THREE.BoxGeometry(0.48, 1.45, 1.18), mainLineMat, 15);
+        gripBody.position.set(1.18, -0.04, 0.02);
+        gripBodyGroup.add(gripBody);
+
+        var gripFront = wirePart(new THREE.CylinderGeometry(0.26, 0.26, 1.45, 16, 1, false, 0, Math.PI), mainLineMat, 18);
+        gripFront.rotation.y = -Math.PI / 2;
+        gripFront.position.set(1.42, -0.04, 0.02);
+        gripFrontGroup.add(gripFront);
+
+        // --- PENTAPRISM VIEWFINDER HUMP & HOT SHOE ---
+        var hump = wirePart(new THREE.BoxGeometry(0.96, 0.54, 0.92), mainLineMat, 18);
+        hump.position.set(0.12, 1.04, 0.05);
+        viewfinderGroup.add(hump);
+
+        var hotShoe = wirePart(new THREE.BoxGeometry(0.44, 0.06, 0.38), mainLineMat, 15);
+        hotShoe.position.set(0.12, 1.34, 0.05);
+        hotShoeGroup.add(hotShoe);
+
+        // --- TOP DECK CONTROLS ---
+        // Mode Dial (Left)
+        var modeDial = wirePart(new THREE.CylinderGeometry(0.26, 0.26, 0.12, 18), mainLineMat, 20);
+        modeDial.position.set(-0.68, 0.86, 0.08);
+        modeDialGroup.add(modeDial);
+
+        // Shutter Button (Right Angled)
+        var shutterCollar = wirePart(new THREE.CylinderGeometry(0.11, 0.12, 0.08, 16), mainLineMat, 20);
+        shutterCollar.position.set(0.98, 0.82, 0.46);
+        shutterGroup.add(shutterCollar);
+
+        var shutterBtn = wirePart(new THREE.CylinderGeometry(0.08, 0.09, 0.05, 16), accentLineMat, 20);
+        shutterBtn.position.set(0.98, 0.88, 0.46);
+        shutterGroup.add(shutterBtn);
+
+        // --- LENS ASSEMBLY (MINIMALIST VECTOR CIRCLES — ZERO CLUTTER) ---
+        // 1. Mount Base Ring
+        lensMountGroup.add(createVectorCircle(0.60, mainLineMat, 0.60));
+        // 2. Zoom Section Ring
+        lensBarrelGroup.add(createVectorCircle(0.58, faintLineMat, 1.15));
+        // 3. Focus Section Ring
+        lensBarrelGroup.add(createVectorCircle(0.57, mainLineMat, 1.55));
+        // 4. SIGNATURE CANON RED ACCENT RING (Distinctive Luxury Accent)
+        lensFrontGroup.add(createVectorCircle(0.56, accentLineMat, 1.76));
+        // 5. Front Lens Thread Rim
+        lensFrontGroup.add(createVectorCircle(0.52, mainLineMat, 1.95));
+        // 6. Inner Aperture Glass Ring
+        lensFrontGroup.add(createVectorCircle(0.32, faintLineMat, 1.92));
+        // 7. Core Aperture Iris Ring
+        lensFrontGroup.add(createVectorCircle(0.18, accentLineMat, 1.88));
+
+        // --- REAR BACK PANEL (VIEWFINDER & LCD HUD SCREEN) ---
+        // Eyepiece Eyecup
+        var evfCup = wirePart(new THREE.BoxGeometry(0.34, 0.26, 0.18), mainLineMat, 15);
+        evfCup.position.set(0.12, 0.62, -0.66);
+        rearViewfinderGroup.add(evfCup);
+
+        // LCD Screen Bezel
+        var lcdBezel = wirePart(new THREE.BoxGeometry(1.15, 0.85, 0.05), mainLineMat, 15);
+        lcdBezel.position.set(-0.35, -0.08, -0.6);
+        lcdGroup.add(lcdBezel);
+
+        // LCD HUD Crosshair & Framing
+        var hudGeo = new THREE.BufferGeometry();
+        var hudPoints = [
+          // Center Crosshair +
+          -0.38, -0.08, -0.63, -0.32, -0.08, -0.63,
+          -0.35, -0.11, -0.63, -0.35, -0.05, -0.63,
+          // Corner Framing Brackets
+          -0.72, 0.18, -0.63, -0.66, 0.18, -0.63,
+          -0.72, 0.18, -0.63, -0.72, 0.12, -0.63,
+          0.02, 0.18, -0.63, -0.04, 0.18, -0.63,
+          0.02, 0.18, -0.63, 0.02, 0.12, -0.63,
+          -0.72, -0.34, -0.63, -0.66, -0.34, -0.63,
+          -0.72, -0.34, -0.63, -0.72, -0.28, -0.63,
+          0.02, -0.34, -0.63, -0.04, -0.34, -0.63,
+          0.02, -0.34, -0.63, 0.02, -0.28, -0.63
+        ];
+        hudGeo.setAttribute('position', new THREE.Float32BufferAttribute(hudPoints, 3));
+        var hudLines = new THREE.LineSegments(hudGeo, hudLineMat);
+        lcdGroup.add(hudLines);
+
+        // Rear D-Pad Ring
+        var dpadRing = wirePart(new THREE.TorusGeometry(0.14, 0.02, 6, 18), faintLineMat, 20);
+        dpadRing.position.set(0.72, -0.1, -0.61);
+        rearControlsGroup.add(dpadRing);
+
+        cameraGroup.add(bodyCoreGroup);
+        cameraGroup.add(topRailGroup);
+        cameraGroup.add(baseRailGroup);
+        cameraGroup.add(gripBodyGroup);
+        cameraGroup.add(gripFrontGroup);
+        cameraGroup.add(viewfinderGroup);
+        cameraGroup.add(hotShoeGroup);
+        cameraGroup.add(modeDialGroup);
+        cameraGroup.add(shutterGroup);
+        cameraGroup.add(lensMountGroup);
+        cameraGroup.add(lensBarrelGroup);
+        cameraGroup.add(lensFrontGroup);
+        cameraGroup.add(rearViewfinderGroup);
+        cameraGroup.add(lcdGroup);
+        cameraGroup.add(rearControlsGroup);
+
+        cameraGroup.userData.explodedParts = [
+          { group: bodyCoreGroup, start: 0.00, base: bodyCoreGroup.position.clone(), offset: new THREE.Vector3(-0.30, -0.04, -0.20), rotation: new THREE.Vector3(0.00, -0.10, 0.00) },
+          { group: topRailGroup, start: 0.02, base: topRailGroup.position.clone(), offset: new THREE.Vector3(-0.12, 0.76, -0.04), rotation: new THREE.Vector3(-0.10, -0.05, 0.02) },
+          { group: baseRailGroup, start: 0.03, base: baseRailGroup.position.clone(), offset: new THREE.Vector3(-0.10, -0.62, -0.08), rotation: new THREE.Vector3(0.10, -0.03, -0.02) },
+          { group: lensMountGroup, start: 0.04, base: lensMountGroup.position.clone(), offset: new THREE.Vector3(-0.08, -0.02, 0.72), rotation: new THREE.Vector3(0.00, 0.00, 0.05) },
+          { group: lensBarrelGroup, start: 0.07, base: lensBarrelGroup.position.clone(), offset: new THREE.Vector3(-0.02, -0.04, 1.34), rotation: new THREE.Vector3(0.00, 0.04, 0.10) },
+          { group: lensFrontGroup, start: 0.10, base: lensFrontGroup.position.clone(), offset: new THREE.Vector3(0.08, -0.02, 2.08), rotation: new THREE.Vector3(0.00, 0.08, 0.16) },
+          { group: viewfinderGroup, start: 0.13, base: viewfinderGroup.position.clone(), offset: new THREE.Vector3(0.02, 0.98, 0.12), rotation: new THREE.Vector3(-0.16, 0.04, 0.00) },
+          { group: hotShoeGroup, start: 0.16, base: hotShoeGroup.position.clone(), offset: new THREE.Vector3(0.04, 1.42, 0.18), rotation: new THREE.Vector3(-0.20, 0.10, 0.08) },
+          { group: modeDialGroup, start: 0.19, base: modeDialGroup.position.clone(), offset: new THREE.Vector3(-0.74, 1.00, 0.18), rotation: new THREE.Vector3(0.18, -0.18, 0.22) },
+          { group: shutterGroup, start: 0.22, base: shutterGroup.position.clone(), offset: new THREE.Vector3(0.76, 1.06, 0.56), rotation: new THREE.Vector3(0.20, 0.26, -0.20) },
+          { group: gripBodyGroup, start: 0.25, base: gripBodyGroup.position.clone(), offset: new THREE.Vector3(1.10, -0.06, 0.26), rotation: new THREE.Vector3(0.00, 0.38, -0.10) },
+          { group: gripFrontGroup, start: 0.28, base: gripFrontGroup.position.clone(), offset: new THREE.Vector3(1.46, -0.04, 0.48), rotation: new THREE.Vector3(0.00, 0.54, -0.16) },
+          { group: rearViewfinderGroup, start: 0.31, base: rearViewfinderGroup.position.clone(), offset: new THREE.Vector3(0.00, 0.44, -1.12), rotation: new THREE.Vector3(0.04, -0.24, 0.04) },
+          { group: lcdGroup, start: 0.34, base: lcdGroup.position.clone(), offset: new THREE.Vector3(-0.42, -0.04, -1.48), rotation: new THREE.Vector3(0.00, -0.30, 0.02) },
+          { group: rearControlsGroup, start: 0.37, base: rearControlsGroup.position.clone(), offset: new THREE.Vector3(0.88, -0.18, -1.34), rotation: new THREE.Vector3(0.06, -0.42, 0.08) }
+        ];
+
+        // Compact scale for clean presence & positioned right
+        cameraGroup.scale.set(0.65, 0.65, 0.65);
+        cameraGroup.position.set(1.45, 0, 0);
+
+        return cameraGroup;
+      }
+
+      var cameraModel = createHollowCamera();
+      scene.add(cameraModel);
+
+      // 5. SCROLL KEYFRAME DEFINITIONS
+      var KEYFRAMES = [
+        // 0% - Hero: Front 3/4 beauty angle
+        { progress: 0.00, ry: -0.38, rx: 0.06, rz: 0.00, cx: 0.0, cy: 0.2, cz: 4.6 },
+        // 25% - About Start: Rotate to side profile
+        { progress: 0.25, ry: -1.25, rx: 0.08, rz: 0.02, cx: -0.1, cy: 0.15, cz: 4.4 },
+        // 50% - Philosophy: Overhead top deck view
+        { progress: 0.50, ry: -0.65, rx: 1.35, rz: 0.00, cx: 0.0, cy: -0.2, cz: 4.2 },
+        // 75% - Philosophy Rear: LCD HUD screen view
+        { progress: 0.75, ry: 2.35, rx: 0.25, rz: -0.04, cx: 0.1, cy: 0.1, cz: 4.3 },
+        // 100% - Footer: Front lens close-up macro
+        { progress: 1.00, ry: 0.00, rx: 0.00, rz: 0.00, cx: 0.0, cy: -0.08, cz: 2.4 }
+      ];
+
+      function interpolateState(progress) {
+        var p0 = KEYFRAMES[0], p1 = KEYFRAMES[KEYFRAMES.length - 1];
+        for (var i = 0; i < KEYFRAMES.length - 1; i++) {
+          if (progress >= KEYFRAMES[i].progress && progress <= KEYFRAMES[i + 1].progress) {
+            p0 = KEYFRAMES[i];
+            p1 = KEYFRAMES[i + 1];
+            break;
+          }
+        }
+        var range = p1.progress - p0.progress;
+        var rawT = range === 0 ? 0 : (progress - p0.progress) / range;
+        var t = rawT < 0.5 ? 4 * rawT * rawT * rawT : 1 - Math.pow(-2 * rawT + 2, 3) / 2;
+
+        return {
+          ry: p0.ry + (p1.ry - p0.ry) * t,
+          rx: p0.rx + (p1.rx - p0.rx) * t,
+          rz: p0.rz + (p1.rz - p0.rz) * t,
+          cx: p0.cx + (p1.cx - p0.cx) * t,
+          cy: p0.cy + (p1.cy - p0.cy) * t,
+          cz: p0.cz + (p1.cz - p0.cz) * t,
+          progress: progress
+        };
+      }
+
+      function smoothstep(value) {
+        var t = Math.min(Math.max(value, 0), 1);
+        return t * t * (3 - 2 * t);
+      }
+
+      function applyExplodedCamera(progress) {
+        var parts = cameraModel.userData.explodedParts || [];
+        for (var i = 0; i < parts.length; i++) {
+          var part = parts[i];
+          var amount = smoothstep((progress - part.start) / 0.22);
+          part.group.position.set(
+            part.base.x + part.offset.x * amount,
+            part.base.y + part.offset.y * amount,
+            part.base.z + part.offset.z * amount
+          );
+          part.group.rotation.set(
+            part.rotation.x * amount,
+            part.rotation.y * amount,
+            part.rotation.z * amount
+          );
+        }
+      }
+
+      var currentState = { ry: -0.38, rx: 0.06, rz: 0, cx: 0.0, cy: 0.2, cz: 4.6, progress: 0 };
+      var targetState = Object.assign({}, currentState);
+      var DAMPING = 0.06;
+      var scrollDot = document.getElementById('si-dot');
+
+      function onScroll() {
+        var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = maxScroll > 0 ? Math.min(Math.max(window.scrollY / maxScroll, 0), 1) : 0;
+        targetState = interpolateState(progress);
+        if (scrollDot) {
+          scrollDot.style.top = (progress * 100) + '%';
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // 6. THEME MATERIAL REFRESH
+      function updateThemeMaterials() {
+        var isDark = document.documentElement.dataset.theme === 'dark';
+        if (isDark) {
+          mainLineMat.color.setHex(0xf4f2eb);
+          mainLineMat.opacity = 0.88;
+          faintLineMat.color.setHex(0xf4f2eb);
+          faintLineMat.opacity = 0.35;
+          accentLineMat.color.setHex(0x79a9e8);
+          ghostFaceMat.color.setHex(0xffffff);
+          ghostFaceMat.opacity = 0.03;
+          hudLineMat.color.setHex(0x79a9e8);
+        } else {
+          mainLineMat.color.setHex(0x050505);
+          mainLineMat.opacity = 0.78;
+          faintLineMat.color.setHex(0x050505);
+          faintLineMat.opacity = 0.25;
+          accentLineMat.color.setHex(0x050505);
+          ghostFaceMat.color.setHex(0x050505);
+          ghostFaceMat.opacity = 0.02;
+          hudLineMat.color.setHex(0x050505);
+        }
+      }
+      updateThemeMaterials();
+
+      var themeObserver = new MutationObserver(updateThemeMaterials);
+      themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+      // 7. RESPONSIVE RESIZE & RIGHT VIEWPORT POSITIONING
+      function onResize() {
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+
+        if (width >= 900) {
+          cameraModel.position.set(1.45, 0, 0);
+          cameraModel.scale.set(0.65, 0.65, 0.65);
+        } else {
+          cameraModel.position.set(0.2, 0, 0);
+          cameraModel.scale.set(0.52, 0.52, 0.52);
+        }
+      }
+      window.addEventListener('resize', onResize);
+      onResize();
+
+      // 8. ANIMATION LOOP
+      function animate() {
+        requestAnimationFrame(animate);
+
+        currentState.ry += (targetState.ry - currentState.ry) * DAMPING;
+        currentState.rx += (targetState.rx - currentState.rx) * DAMPING;
+        currentState.rz += (targetState.rz - currentState.rz) * DAMPING;
+        currentState.cx += (targetState.cx - currentState.cx) * DAMPING;
+        currentState.cy += (targetState.cy - currentState.cy) * DAMPING;
+        currentState.cz += (targetState.cz - currentState.cz) * DAMPING;
+        currentState.progress += (targetState.progress - currentState.progress) * DAMPING;
+
+        cameraModel.rotation.y = currentState.ry;
+        cameraModel.rotation.x = currentState.rx;
+        cameraModel.rotation.z = currentState.rz;
+        applyExplodedCamera(currentState.progress);
+
+        camera.position.set(currentState.cx, currentState.cy, currentState.cz);
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      // Clean up
+      window.addEventListener('beforeunload', function () {
+        scene.traverse(function (obj) {
+          if (obj.geometry) obj.geometry.dispose();
+          if (obj.material) {
+            if (Array.isArray(obj.material)) {
+              obj.material.forEach(function (m) { m.dispose(); });
+            } else {
+              obj.material.dispose();
+            }
+          }
+        });
+        renderer.dispose();
+      });
+    })();
+  </script>
+</body>
+
+</html>

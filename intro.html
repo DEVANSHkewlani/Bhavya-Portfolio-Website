@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bhavya. &mdash; the journey</title>
+  <meta name="description"
+    content="Bhavya Shukla — Media scholar, anchor, production manager, and creative director. The journey from Lucknow to Bengaluru." />
+  <meta property="og:title" content="The Journey — Bhavya" />
+  <meta property="og:description" content="Bhavya — Film Director, Screenwriter & Visual Storyteller. The journey." />
+  <meta property="og:image" content="https://films.work/images/hero.jpg" />
+  <meta property="og:url" content="https://films.work/intro" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ==========================================================================
+       INTRO / JOURNEY SPECIFIC STYLES (SEAMLESSLY INTEGRATED WITH STYLE.CSS)
+       ========================================================================== */
+
+    /* 3D Background Canvas — Fixed behind screen content */
+    #journey-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw !important;
+      height: 100vh !important;
+      z-index: 1;
+      pointer-events: none;
+      display: block;
+    }
+
+    /* Content Stage — Positioned above 3D spiral with clean depth */
+    .journey-content {
+      position: relative;
+      z-index: 10;
+      padding-top: var(--nav-h);
+      min-height: 100vh;
+    }
+
+    /* Journey Hero Header */
+    .journey-hero {
+      min-height: 72vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(3rem, 7vh, 6rem) var(--gutter);
+      position: relative;
+    }
+
+    .journey-hero-inner {
+      max-width: min(780px, 90vw);
+    }
+
+    .journey-hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--border-line);
+      background: var(--card-bg);
+      border-radius: 2px;
+      margin-bottom: 1.8rem;
+    }
+
+    .journey-hero-pill::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--text-primary);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .journey-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 7.5vw, 6.5rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      line-height: 0.95;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .journey-hero-desc {
+      font-size: clamp(1rem, 1.4vw, 1.25rem);
+      line-height: 1.75;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin-bottom: 2.5rem;
+    }
+
+    .journey-scroll-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      opacity: 0.85;
+    }
+
+    .scroll-arrow-pulse {
+      display: inline-block;
+      animation: cueBounce 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes cueBounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(6px);
+      }
+    }
+
+    /* Timeline Container */
+    .timeline-container {
+      position: relative;
+    }
+
+    /* Elegant Timeline Spine running down the left */
+    .timeline-spine {
+      position: absolute;
+      left: clamp(28px, 5.2vw, 72px);
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--border-line);
+      z-index: 11;
+    }
+
+    #timeline-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--text-primary);
+      height: 0%;
+      box-shadow: 0 0 8px var(--text-primary);
+      transition: height 0.1s linear;
+    }
+
+    /* Stage Sections */
+    .stage-section {
+      min-height: 105vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: clamp(60px, 10vh, 120px) 0;
+    }
+
+    .stage-dot {
+      position: absolute;
+      left: clamp(28px, 5.2vw, 72px);
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg-color);
+      border: 2px solid var(--border-line);
+      transition: border-color 0.4s, background-color 0.4s, transform 0.4s, box-shadow 0.4s;
+      z-index: 12;
+    }
+
+    .stage-section.active .stage-dot {
+      border-color: var(--text-primary);
+      background: var(--text-primary);
+      transform: translate(-50%, -50%) scale(1.3);
+      box-shadow: 0 0 14px var(--border-line);
+    }
+
+    .stage-card {
+      margin-left: clamp(56px, 9.5vw, 130px);
+      max-width: min(560px, 84vw);
+      position: relative;
+      background: rgba(239, 236, 230, 0.76);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-line);
+      border-radius: 4px;
+      padding: clamp(2rem, 3.8vw, 3.2rem);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.04);
+      opacity: 0.35;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
+    }
+
+    [data-theme="dark"] .stage-card {
+      background: rgba(12, 12, 12, 0.78);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .stage-section.in-view .stage-card {
+      opacity: 1;
+      transform: translateY(0);
+      border-color: var(--border-line);
+    }
+
+    .stage-section.active .stage-card {
+      border-color: var(--text-primary);
+    }
+
+    .stage-year {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(4.5rem, 8.5vw, 8rem);
+      color: var(--text-primary);
+      opacity: 0.08;
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+
+    .stage-content-wrap {
+      position: relative;
+      z-index: 1;
+    }
+
+    .stage-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--text-primary);
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .stage-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 1.1rem;
+    }
+
+    .stage-desc {
+      font-size: clamp(0.92rem, 1.2vw, 1.02rem);
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 1.8rem;
+    }
+
+    .stage-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .stage-tag {
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.14em;
+      color: var(--text-primary);
+      border: 1px solid var(--border-line);
+      background: var(--card-bg);
+      padding: 0.35rem 0.8rem;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+
+    /* CTA Section at End of Journey */
+    .journey-cta-section {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      padding: clamp(60px, 12vh, 120px) 0 clamp(60px, 12vh, 120px) clamp(56px, 9.5vw, 130px);
+      position: relative;
+    }
+
+    .journey-cta-card {
+      max-width: min(640px, 86vw);
+      background: rgba(239, 236, 230, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-line);
+      border-radius: 4px;
+      padding: clamp(2.5rem, 5vw, 4rem);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.05);
+    }
+
+    [data-theme="dark"] .journey-cta-card {
+      background: rgba(12, 12, 12, 0.85);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+    }
+
+    .cta-label {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.22em;
+      color: var(--text-primary);
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .cta-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .cta-primary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: var(--text-primary);
+      color: var(--bg-color);
+      padding: 1.15rem 2.4rem;
+      border: 1px solid var(--text-primary);
+      border-radius: 2px;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+    }
+
+    .cta-primary-btn:hover {
+      background: transparent;
+      color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    .cta-secondary-link {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-line);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .cta-secondary-link:hover {
+      color: var(--text-primary);
+      border-color: var(--text-primary);
+    }
+
+    @media (max-width: 768px) {
+      .journey-hero {
+        min-height: 60vh;
+      }
+
+      .stage-card {
+        margin-left: 54px;
+        max-width: 82vw;
+        padding: 1.6rem;
+      }
+
+      .journey-cta-section {
+        padding-left: 54px;
+      }
+
+      .journey-cta-card {
+        padding: 1.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 12-COLUMN VISIBLE BACKGROUND GRID (AUTHENTIC TO WEBSITE) -->
+  <div class="grid-lines-bg" aria-hidden="true">
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+  </div>
+
+  <!-- HEADER (GRID HEADER WITH LIVE TICKER & THEME TOGGLE) -->
+  <header id="header">
+    <div class="header-logo-box">
+      <a href="index.html" class="header-logo">bhavya.</a>
+    </div>
+    <div class="header-ticker-box">
+      <div class="ticker-track">
+        <span class="ticker-item active">LIGHTS</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">CAMERA</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">ACTION</span>
+        <span class="ticker-space"></span>
+        <span class="ticker-item active">LIGHTS</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">CAMERA</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">ACTION</span>
+        <span class="ticker-space"></span>
+        <span class="ticker-item active">LIGHTS</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">CAMERA</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">ACTION</span>
+        <span class="ticker-space"></span>
+        <span class="ticker-item active">LIGHTS</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">CAMERA</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">ACTION</span>
+        <span class="ticker-space"></span>
+        <span class="ticker-item active">LIGHTS</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">CAMERA</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">ACTION</span>
+        <span class="ticker-space"></span>
+        <span class="ticker-item active">LIGHTS</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">CAMERA</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">ACTION</span>
+        <span class="ticker-space"></span>
+      </div>
+    </div>
+    <button type="button" id="theme-toggle" class="header-theme-toggle" aria-label="Toggle light/dark theme">
+      <span id="theme-text">LIGHT</span>
+      <span class="theme-square"></span>
+    </button>
+    <button type="button" id="menu-btn" class="header-menu-btn" aria-label="Toggle navigation drawer">
+      <div class="menu-burger-lines">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+  </header>
+
+  <!-- SLIDE-OVER NAVIGATION DRAWER (HALF PREVIEW / HALF MENU) -->
+  <div id="nav-drawer" role="dialog" aria-modal="true" aria-label="Site Navigation">
+    <div class="drawer-preview-stage">
+      <div class="drawer-preview-backdrop"></div>
+      <div class="drawer-preview-layer active" data-preview="home">
+        <img src="images/hero.jpg" alt="Home preview" class="drawer-preview-img" />
+        <div class="drawer-preview-tag"><span>01</span> / HOME // ENTERTAINMENT &amp; PRODUCTION</div>
+      </div>
+      <div class="drawer-preview-layer" data-preview="about">
+        <img src="images/about_portrait_1791400145203.jpg" alt="Bhavya Shukla portrait" class="drawer-preview-img" />
+        <div class="drawer-preview-tag"><span>02</span> / ABOUT // THE CREATOR &amp; ANCHOR</div>
+      </div>
+      <div class="drawer-preview-layer" data-preview="works">
+        <img src="images/work1.jpg" alt="Selected Works still" class="drawer-preview-img" />
+        <div class="drawer-preview-tag"><span>03</span> / WORKS // PRODUCTIONS &amp; FILMS</div>
+      </div>
+      <div class="drawer-preview-layer" data-preview="experience">
+        <img src="images/project1_img_1791400184057.jpg" alt="Experience on set" class="drawer-preview-img" />
+        <div class="drawer-preview-tag"><span>04</span> / EXPERIENCE // BROADCAST &amp; FESTIVALS</div>
+      </div>
+      <div class="drawer-preview-layer" data-preview="achievements">
+        <div class="drawer-slideshow" id="drawer-achieve-slideshow">
+          <img src="images/still1.jpg" alt="Award Still 1" class="drawer-slide-img active" />
+          <img src="images/still2.jpg" alt="Award Still 2" class="drawer-slide-img" />
+          <img src="images/still3.jpg" alt="Award Still 3" class="drawer-slide-img" />
+          <img src="images/still4.jpg" alt="Award Still 4" class="drawer-slide-img" />
+          <img src="images/still5.jpg" alt="Award Still 5" class="drawer-slide-img" />
+        </div>
+        <div class="drawer-preview-tag"><span>05</span> / HONORS // AWARDS &amp; RECOGNITIONS</div>
+      </div>
+      <div class="drawer-preview-layer" data-preview="contact">
+        <img src="images/hero_portrait_1791400132911.jpg" alt="Contact Bhavya" class="drawer-preview-img" />
+        <div class="drawer-preview-tag"><span>06</span> / CONTACT // COLLABORATIONS &amp; INQUIRIES</div>
+      </div>
+    </div>
+
+    <div class="drawer-content-stage">
+      <ul class="drawer-links">
+        <li><a href="index.html" data-menu-target="home"><span class="nav-num">01</span><span
+              class="nav-text">home.</span></a></li>
+        <li><a href="about.html" data-menu-target="about"><span class="nav-num">02</span><span
+              class="nav-text">about.</span></a></li>
+        <li><a href="works.html" data-menu-target="works"><span class="nav-num">03</span><span
+              class="nav-text">works.</span></a></li>
+        <li><a href="experience.html" data-menu-target="experience"><span class="nav-num">04</span><span
+              class="nav-text">experience.</span></a></li>
+        <li><a href="achievements.html" data-menu-target="achievements"><span class="nav-num">05</span><span
+              class="nav-text">achievements.</span></a></li>
+        <li><a href="contact.html" data-menu-target="contact"><span class="nav-num">06</span><span
+              class="nav-text">contact.</span></a></li>
+      </ul>
+      <div class="drawer-footer">
+        <span>STUDENT AT MAHE BENGALURU &bull; CGPA 9.6</span>
+        <span>bhavya.tia@gmail.com</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIXED FULLSCREEN 3D CANVAS FOR SMOOTH SPIRAL PATH -->
+  <canvas id="journey-canvas" aria-hidden="true"></canvas>
+
+  <!-- MAIN SCROLLABLE JOURNEY CONTENT -->
+  <main class="journey-content">
+
+    <!-- HERO HEADER -->
+    <section class="journey-hero">
+      <div class="journey-hero-inner">
+        <div class="journey-hero-pill">CHRONICLE // 2020 &ndash; PRESENT</div>
+        <h1 class="journey-hero-title">the journey.</h1>
+        <p class="journey-hero-desc">From scholastic distinctions in Lucknow to MAHE Bengaluru, national radio
+          production at RED FM, live hosting, and independent film direction &mdash; an evolving chronicle through
+          entertainment marketing and media craft.</p>
+        <div class="journey-scroll-cue">
+          <span class="scroll-arrow-pulse">&darr;</span>
+          <span>SCROLL DOWN TO TRAVEL</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE MILESTONES -->
+    <div class="timeline-container">
+      <div class="timeline-spine">
+        <div id="timeline-fill"></div>
+      </div>
+
+      <!-- STAGE 01 -->
+      <section class="stage-section" data-stage="0" id="stage-0">
+        <div class="stage-dot"></div>
+        <div class="stage-card">
+          <div class="stage-year" aria-hidden="true">2020</div>
+          <div class="stage-content-wrap">
+            <div class="stage-label">Stage 01 &mdash; Scholastic Foundation</div>
+            <h2 class="stage-title">Stella Maris, Lucknow.</h2>
+            <p class="stage-desc">Built a disciplined academic and articulation foundation in Lucknow. Secured Rank 2 in
+              ISC Class XII with 98.0% and Rank 3 in ICSE Class X with 97.2%, nurturing a lifelong passion for public
+              speaking, writing, and stage presence.</p>
+            <div class="stage-tags">
+              <span class="stage-tag">ISC Rank 2 (98.0%)</span>
+              <span class="stage-tag">ICSE Rank 3 (97.2%)</span>
+              <span class="stage-tag">Public Speaking</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STAGE 02 -->
+      <section class="stage-section" data-stage="1" id="stage-1">
+        <div class="stage-dot"></div>
+        <div class="stage-card">
+          <div class="stage-year" aria-hidden="true">2024</div>
+          <div class="stage-content-wrap">
+            <div class="stage-label">Stage 02 &mdash; Academic Excellence</div>
+            <h2 class="stage-title">MAHE Bengaluru.</h2>
+            <p class="stage-desc">Commenced Bachelor of Arts in Journalism and Mass Communication (BJMC) at the
+              Department of Liberal Arts, Humanities and Social Sciences (DLHS), MAHE Bengaluru. Earned the prestigious
+              Academic Excellence Award with an outstanding 9.6 CGPA.</p>
+            <div class="stage-tags">
+              <span class="stage-tag">Academic Excellence Award</span>
+              <span class="stage-tag">CGPA 9.6</span>
+              <span class="stage-tag">BJMC Honors</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STAGE 03 -->
+      <section class="stage-section" data-stage="2" id="stage-2">
+        <div class="stage-dot"></div>
+        <div class="stage-card">
+          <div class="stage-year" aria-hidden="true">2024</div>
+          <div class="stage-content-wrap">
+            <div class="stage-label">Stage 03 &mdash; Live Anchoring &amp; The Mic</div>
+            <h2 class="stage-title">The Stage &amp; Voice.</h2>
+            <p class="stage-desc">Commanded collegiate and state stages. Felicitated by the Honorable Governor of Uttar
+              Pradesh for anchoring a major state program; became 2nd Runner-Up in the On-Air-Flair RJ Hunt at MAHE
+              Bengaluru, establishing dynamic crowd connection.</p>
+            <div class="stage-tags">
+              <span class="stage-tag">Governor's Felicitation</span>
+              <span class="stage-tag">On-Air-Flair RJ Hunt</span>
+              <span class="stage-tag">Live Hosting</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STAGE 04 -->
+      <section class="stage-section" data-stage="3" id="stage-3">
+        <div class="stage-dot"></div>
+        <div class="stage-card">
+          <div class="stage-year" aria-hidden="true">2025</div>
+          <div class="stage-content-wrap">
+            <div class="stage-label">Stage 04 &mdash; Leadership &amp; Culture</div>
+            <h2 class="stage-title">TAMASHA &amp; Band Baaja Baaraat.</h2>
+            <p class="stage-desc">Founded DLHS MAHE's inaugural pop culture and entertainment club, TAMASHA, serving as
+              Vice President. Led the marquee cultural celebration 'Band Baaja Baaraat' as Event Head, driving a record
+              attendance of 1,800+ attendees.</p>
+            <div class="stage-tags">
+              <span class="stage-tag">TAMASHA Founder</span>
+              <span class="stage-tag">Event Head (1,800+ Footfall)</span>
+              <span class="stage-tag">Student Council</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STAGE 05 -->
+      <section class="stage-section" data-stage="4" id="stage-4">
+        <div class="stage-dot"></div>
+        <div class="stage-card">
+          <div class="stage-year" aria-hidden="true">2025</div>
+          <div class="stage-content-wrap">
+            <div class="stage-label">Stage 05 &mdash; News &amp; National Radio</div>
+            <h2 class="stage-title">Broadcast &amp; Digital Internships.</h2>
+            <p class="stage-desc">Conducted television research and script drafting as Editorial Intern at Bharat
+              Samachar, followed by a production internship at RED FM India. Produced on-ground digital brand shoots for
+              Red FM and supported nationwide radio shows.</p>
+            <div class="stage-tags">
+              <span class="stage-tag">RED FM India</span>
+              <span class="stage-tag">Bharat Samachar</span>
+              <span class="stage-tag">Commercial Brand Shoots</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STAGE 06 -->
+      <section class="stage-section" data-stage="5" id="stage-5">
+        <div class="stage-dot"></div>
+        <div class="stage-card">
+          <div class="stage-year" aria-hidden="true">2026</div>
+          <div class="stage-content-wrap">
+            <div class="stage-label">Stage 06 &mdash; Now &amp; Productions</div>
+            <h2 class="stage-title">Kirdaar &amp; Beyond.</h2>
+            <p class="stage-desc">Wrote, directed, and starred in the upcoming short film 'Kirdaar', produced and acted
+              in 'Life Note', scripted talk-show parody 'The Nation Wants to Know', and clinched 1st Place in Mad Ads at
+              Rubaru 2026.</p>
+            <div class="stage-tags">
+              <span class="stage-tag">Kirdaar Director</span>
+              <span class="stage-tag">Mad Ads Winner 2026</span>
+              <span class="stage-tag">Creative Direction</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA SECTION -->
+      <section class="journey-cta-section">
+        <div class="journey-cta-card">
+          <p class="cta-label">THE STORY CONTINUES</p>
+          <h2 class="cta-title">see the work.</h2>
+          <div class="cta-actions">
+            <a href="index.html" class="cta-primary-btn">Enter Portfolio &rarr;</a>
+            <a href="about.html" class="cta-secondary-link">or read the full biography &nearr;</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- SITE FOOTER (STANDARDIZED EDITORIAL FOOTER MATCHING ALL OTHER PAGES) -->
+  <footer id="site-footer">
+    <div class="footer-nav-grid">
+      <a href="about.html" class="footer-nav-cell">ABOUT</a>
+      <a href="works.html" class="footer-nav-cell">WORKS</a>
+      <a href="contact.html" class="footer-nav-cell">CONTACT</a>
+    </div>
+    <div class="footer-middle-grid">
+      <div class="footer-middle-left">
+        <p class="footer-subhead">ELSEWHERE</p>
+        <div class="footer-social-links">
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-link">INSTAGRAM &rarr;</a>
+          <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-link">YOUTUBE &rarr;</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener" class="footer-social-link">LINKEDIN &rarr;</a>
+        </div>
+      </div>
+      <div class="footer-middle-right">
+        <p class="footer-subhead">COLOPHON</p>
+        <p style="font-size: 0.78rem; opacity: 0.8; line-height: 1.7;">
+          &copy; 2026 BHAVYA SHUKLA. ALL RIGHTS RESERVED.<br>
+          DESIGNED &amp; DEVELOPED WITH 12-COLUMN SCAFFOLD.
+        </p>
+        <div class="footer-action-links">
+          <a href="Bhavya_Shukla_CV.pdf" download="Bhavya_Shukla_CV.pdf" id="download-cv" class="footer-action-link"
+            aria-label="Download Bhavya Shukla CV">&darr; DOWNLOAD CV</a>
+          <a href="https://1drv.ms/f/c/all-content" target="_blank" rel="noopener noreferrer" id="onedrive-link" class="footer-action-link"
+            aria-label="View all media, videos and content archive on OneDrive">&nearr; ONEDRIVE ARCHIVE</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-big-crop-wrap">
+      <div class="footer-crowd-canvas-wrap" aria-hidden="true"></div>
+    </div>
+  </footer>
+
+  <!-- THREE.JS FOR THE SMOOTH 3D SPIRAL PATH -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- 3D SPIRAL PATH ENGINE (CLEAN, EXPANSIVE 3D TUBE, NO EXTRA LINES) -->
+  <script>
+    (function () {
+      'use strict';
+
+      var canvas = document.getElementById('journey-canvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      /* ── SCENE & RENDERER SETUP ── */
+      var renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: true,
+        powerPreference: 'high-performance'
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x000000, 0);
+
+      var scene = new THREE.Scene();
+
+      /* Perspective Camera: Expansive view revealing genuine 3D corkscrew depth */
+      var cam = new THREE.PerspectiveCamera(54, window.innerWidth / window.innerHeight, 0.1, 100);
+      var BASE_CAM_Z = 10.5;
+      // Initial camera position matches the starting coil and cat at top of journey
+      cam.position.set(0, 8.5, BASE_CAM_Z);
+      cam.lookAt(0.5, 8.5, 0);
+
+      /* ── THEME COLORS ── */
+      function isDark() {
+        return document.documentElement.dataset.theme === 'dark';
+      }
+
+      // Light theme: black path; Dark theme: warm ivory path.
+      function getPathColor() {
+        return isDark() ? 0xEDE8DE : 0x050505;
+      }
+      function getEmissiveColor() {
+        return isDark() ? 0x8B1419 : 0x050505;
+      }
+      function getCoreGlowColor() {
+        return isDark() ? 0x79A9E8 : 0x050505;
+      }
+
+      /* ── LIGHTING (MATTE-FRIENDLY: SOFT DIFFUSE, NO HARD SPECULAR) ── */
+      var ambLight = new THREE.AmbientLight(0xffffff, 1.45);
+      scene.add(ambLight);
+
+      var keyLight = new THREE.DirectionalLight(0xfff5ee, 1.45);
+      keyLight.position.set(6, 14, 10);
+      scene.add(keyLight);
+
+      var fillLight = new THREE.DirectionalLight(0xe8d0d0, 0.85);
+      fillLight.position.set(-8, -10, 6);
+      scene.add(fillLight);
+
+      /* ── 3D SPIRAL GROUP ── */
+      var spiralGroup = new THREE.Group();
+      scene.add(spiralGroup);
+
+      /* ── EDGE-TO-EDGE 3D HELIX CURVE ──
+         Starts gracefully beyond the top-right screen edge, coils across screen in 3D,
+         and exits smoothly beyond the bottom-left screen edge for a complete journey.
+      */
+      function getSpiralParams() {
+        var isMobile = window.innerWidth < 800;
+        return {
+          radius: isMobile ? 2.6 : 4.4,
+          height: 23.0,
+          turns: 3.2,
+          centerX: isMobile ? 0.0 : 0.85
+        };
+      }
+
+      var params = getSpiralParams();
+
+      class CompleteHelixCurve extends THREE.Curve {
+        constructor(r, h, turns, cx) {
+          super();
+          this.radius = r;
+          this.height = h;
+          this.turns = turns;
+          this.centerX = cx;
+        }
+        getPoint(t, optionalTarget) {
+          var pt = optionalTarget || new THREE.Vector3();
+          // Helical turns from entry to exit
+          var angle = (t * this.turns + 0.12) * Math.PI * 2;
+          var spiralX = Math.cos(angle) * this.radius;
+          var spiralZ = Math.sin(angle) * (this.radius * 0.72);
+
+          // Edge sweep blend: expands out to screen edges at t=0 and t=1
+          var edgeBlend = Math.pow(Math.abs(t - 0.5) * 2, 2.8);
+          var edgeDir = (0.5 - t); // top sweeps right, bottom sweeps left
+          var edgeX = edgeDir * 12.0 * edgeBlend;
+
+          var x = this.centerX + spiralX + edgeX;
+          var y = (0.5 - t) * this.height; // flows from +11.5 at top to -11.5 at bottom
+          var z = spiralZ - edgeBlend * 3.5; // plunges deep into depth at the boundaries
+          return pt.set(x, y, z);
+        }
+      }
+
+      var curve = new CompleteHelixCurve(params.radius, params.height, params.turns, params.centerX);
+
+      /* ── MAIN 3D VOLUMETRIC PATH (SMOOTH TUBE GEOMETRY) ── */
+      var TUBE_SEGS = 900;
+      var TUBE_RADIUS = 0.11; // Bold, distinct 3D cylindrical track
+      var tubeGeo = new THREE.TubeGeometry(curve, TUBE_SEGS, TUBE_RADIUS, 18, false);
+      /* ── MATTE MATERIALS (roughness ≥ 0.92, metalness = 0) ── */
+      var tubeMat = new THREE.MeshStandardMaterial({
+        color: getPathColor(),
+        emissive: getEmissiveColor(),
+        emissiveIntensity: 0.18,
+        roughness: 0.94,
+        metalness: 0.0,
+        transparent: true,
+        opacity: 0.95
+      });
+      var tubeMesh = new THREE.Mesh(tubeGeo, tubeMat);
+      spiralGroup.add(tubeMesh);
+
+      /* ── LUMINOUS INNER CORE CONTOUR FOR ARCHITECTURAL DEPTH ── */
+      var coreGeo = new THREE.TubeGeometry(curve, TUBE_SEGS, 0.034, 10, false);
+      var coreMat = new THREE.MeshBasicMaterial({
+        color: getCoreGlowColor(),
+        transparent: true,
+        opacity: 0.75
+      });
+      var coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      spiralGroup.add(coreMesh);
+
+      /* ── CHECKPOINT MILESTONE NODES (ON THE PATH ONLY — NO EXTRA LINES) ── */
+      var STAGE_T = [0.12, 0.27, 0.42, 0.58, 0.73, 0.88];
+      var milestones = [];
+
+      STAGE_T.forEach(function (st, idx) {
+        var pt = curve.getPoint(st);
+        var tangent = curve.getTangent(st).normalize();
+
+        var mNode = new THREE.Group();
+        mNode.position.copy(pt);
+
+        // Smooth milestone collar torus aligned to path tangent (matte)
+        var collarGeo = new THREE.TorusGeometry(0.24, 0.038, 16, 28);
+        var collarMat = new THREE.MeshStandardMaterial({
+          color: getPathColor(),
+          roughness: 0.92,
+          metalness: 0.0
+        });
+        var collarMesh = new THREE.Mesh(collarGeo, collarMat);
+        collarMesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), tangent);
+        mNode.add(collarMesh);
+
+        // Embedded smooth pearl sphere at center of milestone node (matte)
+        var pearlGeo = new THREE.SphereGeometry(0.13, 20, 20);
+        var pearlMat = new THREE.MeshStandardMaterial({
+          color: getPathColor(),
+          emissive: getPathColor(),
+          emissiveIntensity: 0.30,
+          roughness: 0.93,
+          metalness: 0.0
+        });
+        var pearlMesh = new THREE.Mesh(pearlGeo, pearlMat);
+        mNode.add(pearlMesh);
+
+        spiralGroup.add(mNode);
+        milestones.push({
+          group: mNode,
+          collar: collarMesh,
+          pearl: pearlMesh,
+          t: st,
+          idx: idx
+        });
+      });
+
+      /* ── UFO TRAVELER (MATTE — NO GLOSS, NO METALNESS) ── */
+      var ufoGroup = new THREE.Group();
+      spiralGroup.add(ufoGroup);
+
+      // Shared matte materials
+      var ufoSaucerMat = new THREE.MeshStandardMaterial({
+        color: isDark() ? 0xd0cabb : 0x2a2a2e,
+        roughness: 0.94,
+        metalness: 0.0
+      });
+      var ufoDomeMat = new THREE.MeshStandardMaterial({
+        color: isDark() ? 0xe8e0d0 : 0x1a2635,
+        roughness: 0.93,
+        metalness: 0.0,
+        transparent: true,
+        opacity: 0.88
+      });
+      var ufoRimMat = new THREE.MeshStandardMaterial({
+        color: isDark() ? 0xc0b8a8 : 0x3d3d45,
+        roughness: 0.95,
+        metalness: 0.0
+      });
+      var ufoYellowMat = new THREE.MeshStandardMaterial({
+        color: 0xffd152,
+        emissive: 0xd49a00,
+        emissiveIntensity: 0.35,
+        roughness: 0.92,
+        metalness: 0.0
+      });
+      var ufoPinkMat = new THREE.MeshStandardMaterial({
+        color: 0xff6584,
+        emissive: 0xc03050,
+        emissiveIntensity: 0.30,
+        roughness: 0.92,
+        metalness: 0.0
+      });
+      var ufoGreenMat = new THREE.MeshStandardMaterial({
+        color: 0x5fb57a,
+        emissive: 0x286640,
+        emissiveIntensity: 0.25,
+        roughness: 0.92,
+        metalness: 0.0
+      });
+      var ufoAntennaMat = new THREE.MeshStandardMaterial({
+        color: 0x4a88e8,
+        emissive: 0x1e3a5f,
+        emissiveIntensity: 0.40,
+        roughness: 0.93,
+        metalness: 0.0
+      });
+
+      // 1. Lower saucer hull (wide flat disc)
+      var hullGeo = new THREE.CylinderGeometry(0.55, 0.42, 0.10, 32);
+      var hullMesh = new THREE.Mesh(hullGeo, ufoSaucerMat);
+      hullMesh.position.y = 0.0;
+      ufoGroup.add(hullMesh);
+
+      // 2. Mid rim band (narrow torus)
+      var rimGeo = new THREE.TorusGeometry(0.50, 0.055, 14, 40);
+      var rimMesh = new THREE.Mesh(rimGeo, ufoRimMat);
+      rimMesh.rotation.x = Math.PI / 2;
+      rimMesh.position.y = 0.05;
+      ufoGroup.add(rimMesh);
+
+      // 3. Upper dome (frosted half-sphere cockpit)
+      var domeGeo = new THREE.SphereGeometry(0.26, 22, 14, 0, Math.PI * 2, 0, Math.PI / 2);
+      var domeMesh = new THREE.Mesh(domeGeo, ufoDomeMat);
+      domeMesh.position.y = 0.10;
+      ufoGroup.add(domeMesh);
+
+      // 4. Pilot silhouette orb inside dome
+      var pilotMat = new THREE.MeshStandardMaterial({
+        color: 0x5fb57a, roughness: 0.95, metalness: 0.0
+      });
+      var pilotGeo = new THREE.SphereGeometry(0.10, 14, 10);
+      var pilotMesh = new THREE.Mesh(pilotGeo, pilotMat);
+      pilotMesh.position.y = 0.18;
+      ufoGroup.add(pilotMesh);
+
+      // 5. Antenna (thin rod + red tip ball)
+      var antennaRodGeo = new THREE.CylinderGeometry(0.014, 0.014, 0.25, 8);
+      var antennaRodMesh = new THREE.Mesh(antennaRodGeo, ufoRimMat);
+      antennaRodMesh.position.y = 0.45;
+      ufoGroup.add(antennaRodMesh);
+      var antennaTipGeo = new THREE.SphereGeometry(0.035, 12, 12);
+      var antennaTipMesh = new THREE.Mesh(antennaTipGeo, ufoAntennaMat);
+      antennaTipMesh.position.y = 0.58;
+      ufoGroup.add(antennaTipMesh);
+
+      // 6. Portal light ring — alternating yellow and pink pills around the rim
+      var portalLights = [];
+      var NUM_PORTALS = 10;
+      var portalMaterials = [ufoYellowMat, ufoPinkMat, ufoGreenMat];
+      for (var pi = 0; pi < NUM_PORTALS; pi++) {
+        var angle = (pi / NUM_PORTALS) * Math.PI * 2;
+        var pGeo = new THREE.SphereGeometry(0.045, 10, 8);
+        var pMat = portalMaterials[pi % portalMaterials.length];
+        var pMesh = new THREE.Mesh(pGeo, pMat);
+        pMesh.position.set(
+          Math.cos(angle) * 0.48,
+          0.05,
+          Math.sin(angle) * 0.48
+        );
+        ufoGroup.add(pMesh);
+        portalLights.push({ mesh: pMesh, angle: angle });
+      }
+
+      // 7. Downward tractor beam (matte semi-transparent cone)
+      var beamMat = new THREE.MeshStandardMaterial({
+        color: 0x5fb57a,
+        emissive: 0x286640,
+        emissiveIntensity: 0.22,
+        roughness: 0.96,
+        metalness: 0.0,
+        transparent: true,
+        opacity: 0.30,
+        side: THREE.DoubleSide
+      });
+      var beamGeo = new THREE.ConeGeometry(0.32, 0.60, 20, 1, true);
+      var beamMesh = new THREE.Mesh(beamGeo, beamMat);
+      beamMesh.position.y = -0.36;
+      beamMesh.rotation.x = Math.PI; // cone opens downward
+      ufoGroup.add(beamMesh);
+
+      // UFO soft underlight (replaces cat point light)
+      var ufoLight = new THREE.PointLight(0x5fb57a, 1.2, 3.8);
+      ufoLight.position.set(0, -0.25, 0);
+      ufoGroup.add(ufoLight);
+
+      /* ── SCROLL STATE & SMOOTH LERP DAMPING ── */
+      var targetT = 0;
+      var currentT = 0;
+      var DAMPING = 0.08;
+
+      function updateScrollTarget() {
+        var maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+        targetT = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
+      }
+      window.addEventListener('scroll', updateScrollTarget, { passive: true });
+      updateScrollTarget();
+
+      /* ── STAGE SECTION OBSERVER ── */
+      var stageSections = document.querySelectorAll('.stage-section');
+      var secObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in-view');
+          }
+          e.target.classList.toggle('active', e.intersectionRatio >= 0.40);
+        });
+      }, { threshold: [0.15, 0.40] });
+      stageSections.forEach(function (s) { secObserver.observe(s); });
+
+      var timelineFill = document.getElementById('timeline-fill');
+
+      /* ── THEME MUTATION OBSERVER ── */
+      function applyThemeColors() {
+        var pc = getPathColor();
+        var ec = getEmissiveColor();
+        var gc = getCoreGlowColor();
+
+        tubeMat.color.setHex(pc);
+        tubeMat.emissive.setHex(ec);
+        coreMat.color.setHex(gc);
+
+        // Update UFO hull/dome for theme
+        ufoSaucerMat.color.setHex(isDark() ? 0xd0cabb : 0x2a2a2e);
+        ufoDomeMat.color.setHex(isDark() ? 0xe8e0d0 : 0x1a2635);
+        ufoRimMat.color.setHex(isDark() ? 0xc0b8a8 : 0x3d3d45);
+
+        milestones.forEach(function (m) {
+          m.collar.material.color.setHex(pc);
+          m.pearl.material.color.setHex(pc);
+          m.pearl.material.emissive.setHex(pc);
+        });
+      }
+
+      var themeObserver = new MutationObserver(applyThemeColors);
+      themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+      /* ── RESIZE HANDLER (RESPONSIVE 3D CURVE REGENERATION) ── */
+      function onWindowResize() {
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        cam.aspect = w / h;
+        cam.updateProjectionMatrix();
+        renderer.setSize(w, h);
+
+        var newParams = getSpiralParams();
+        if (Math.abs(newParams.radius - params.radius) > 0.1 || Math.abs(newParams.centerX - params.centerX) > 0.1) {
+          params = newParams;
+          curve.radius = params.radius;
+          curve.centerX = params.centerX;
+
+          tubeMesh.geometry.dispose();
+          tubeMesh.geometry = new THREE.TubeGeometry(curve, TUBE_SEGS, TUBE_RADIUS, 18, false);
+
+          coreMesh.geometry.dispose();
+          coreMesh.geometry = new THREE.TubeGeometry(curve, TUBE_SEGS, 0.034, 10, false);
+
+          milestones.forEach(function (m) {
+            var pt = curve.getPoint(m.t);
+            var tangent = curve.getTangent(m.t).normalize();
+            m.group.position.copy(pt);
+            m.collar.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), tangent);
+          });
+        }
+      }
+      window.addEventListener('resize', onWindowResize, { passive: true });
+
+      /* ── SMOOTH ANIMATION LOOP ── */
+      var animId;
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function renderLoop() {
+        animId = requestAnimationFrame(renderLoop);
+
+        // Lerp scroll position for silky continuous motion
+        currentT += (targetT - currentT) * DAMPING;
+
+        // Update 2D timeline spine fill
+        if (timelineFill) {
+          timelineFill.style.height = (currentT * 100).toFixed(1) + '%';
+        }
+
+        // Compute UFO position & tangent on 3D path
+        var ufoPt = curve.getPoint(currentT);
+        var tangent = curve.getTangent(currentT).normalize();
+
+        ufoGroup.position.copy(ufoPt);
+
+        // Orient UFO facing forward along the 3D spiral direction
+        var forward = new THREE.Vector3(0, 0, 1);
+        var quat = new THREE.Quaternion().setFromUnitVectors(forward, tangent);
+        ufoGroup.quaternion.copy(quat);
+
+        // Elevate UFO above the tube surface with a gentle hover wobble
+        var time = Date.now() * 0.001;
+        var hoverBob = Math.sin(time * 3.0) * 0.05;
+        ufoGroup.translateY(TUBE_RADIUS + 0.45 + hoverBob);
+
+        // Gentle banking roll tied to path curvature
+        ufoGroup.rotateZ(Math.sin(time * 2.0) * 0.06);
+
+        // Spin portal lights around the rim
+        var portalSpinAngle = time * 1.4;
+        for (var pi2 = 0; pi2 < portalLights.length; pi2++) {
+          var pLight = portalLights[pi2];
+          var newAngle = pLight.angle + portalSpinAngle;
+          pLight.mesh.position.set(
+            Math.cos(newAngle) * 0.48,
+            0.05,
+            Math.sin(newAngle) * 0.48
+          );
+        }
+
+        // Tractor beam pulse (opacity flicker)
+        beamMesh.material.opacity = 0.22 + Math.sin(time * 4.0) * 0.10;
+        antennaTipMesh.material.emissiveIntensity = 0.35 + Math.sin(time * 5.0) * 0.25;
+
+        // Continuous gentle 3D undulation so spiral is visibly alive
+        spiralGroup.rotation.y = Math.sin(time * 0.5) * 0.09;
+        spiralGroup.rotation.x = Math.cos(time * 0.35) * 0.04;
+
+        // Active milestone pulse feedback
+        milestones.forEach(function (m) {
+          var dist = Math.abs(currentT - m.t);
+          if (dist < 0.07) {
+            var scale = 1.0 + (1 - dist / 0.07) * 0.45;
+            m.group.scale.set(scale, scale, scale);
+            m.pearl.material.emissiveIntensity = 0.75;
+          } else {
+            m.group.scale.set(1, 1, 1);
+            m.pearl.material.emissiveIntensity = 0.20;
+          }
+        });
+
+        // Camera vertical tracking: smooth glide centered on the UFO
+        var targetCamY = ufoPt.y;
+        cam.position.y += (targetCamY - cam.position.y) * 0.075;
+
+        // Gentle subtle horizontal camera drift for cinematic parallax
+        var orbitX = Math.sin(time * 0.45) * 0.35;
+        cam.position.x = orbitX;
+        cam.lookAt(params.centerX * 0.45, cam.position.y, 0);
+
+        renderer.render(scene, cam);
+      }
+
+      if (!prefersReduced) {
+        renderLoop();
+      } else {
+        currentT = targetT;
+        ufoGroup.position.copy(curve.getPoint(currentT));
+        cam.position.y = curve.getPoint(currentT).y;
+        renderer.render(scene, cam);
+      }
+
+      /* ── TEARDOWN ON UNLOAD ── */
+      window.addEventListener('beforeunload', function () {
+        cancelAnimationFrame(animId);
+        themeObserver.disconnect();
+        secObserver.disconnect();
+        scene.traverse(function (obj) {
+          if (obj.geometry) obj.geometry.dispose();
+          if (obj.material) {
+            if (Array.isArray(obj.material)) obj.material.forEach(function (m) { m.dispose(); });
+            else obj.material.dispose();
+          }
+        });
+        renderer.dispose();
+      });
+
+    })();
+  </script>
+
+  <!-- WEBSITE CORE JAVASCRIPT (THEME SWITCHER, DRAWER, SCRAMBLE HOVER, ETC.) -->
+  <script src="js/main.js"></script>
+  <script src="js/footer-bhavya.js"></script>
+  <script src="js/footer-crowd.js"></script>
+</body>
+
+</html>

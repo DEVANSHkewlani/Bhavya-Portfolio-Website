@@ -1,0 +1,46 @@
+[
+  {
+    "title": "KIRDAAR",
+    "type": "Short Film",
+    "role": "Writer, Director & Lead Actor",
+    "genre": "Character Drama",
+    "status": "In Post-Production",
+    "image": "images/work1.jpg",
+    "imageAlt": "Kirdaar Short Film",
+    "scriptLink": "#scripts",
+    "description": "Wrote and directed the film and played the lead character, managing the project from pre-production, casting, location shoots through post-production editing."
+  },
+  {
+    "title": "The Nation Wants to Know",
+    "type": "Talk-Show Parody",
+    "role": "Scriptwriter, Production Manager & Actor",
+    "genre": "Comedy / Satire",
+    "status": null,
+    "image": "images/still5.jpg",
+    "imageAlt": "The Nation Wants to Know studio parody",
+    "scriptLink": "#scripts",
+    "description": "Worked across scriptwriting, production management, and on-screen comic performance for a multi-camera parody talk-show satirizing sensationalist television debates."
+  },
+  {
+    "title": "Life Note",
+    "type": "Short Film",
+    "role": "Actor & Producer",
+    "genre": "Student Narrative Short",
+    "status": null,
+    "image": "images/still6.jpg",
+    "imageAlt": "Life Note short film",
+    "scriptLink": "#scripts",
+    "description": "Contributed as an on-screen performer and producer, directing logistics, shoot schedules, budget management, and dramatic character realization."
+  },
+  {
+    "title": "Kaksha",
+    "type": "Short Film",
+    "role": "Lead Actor / Antagonist",
+    "genre": "Narrative Drama",
+    "status": null,
+    "image": "images/work3.jpg",
+    "imageAlt": "Kaksha short film still",
+    "scriptLink": null,
+    "description": "Played the central antagonist in a student short-film production, exploring psychological friction, peer competition, and intense dramatic performance."
+  }
+]

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>contact. — bhavya shukla.</title>
+  <meta name="description"
+    content="Inquire regarding entertainment marketing, hosting &amp; anchoring, and content production collaborations with Bhavya Shukla." />
+  <meta property="og:title" content="Contact — Bhavya" />
+  <meta property="og:description"
+    content="Inquire regarding film directing and screenwriting collaborations with Bhavya." />
+  <meta property="og:image" content="https://films.work/images/hero.jpg" />
+  <meta property="og:url" content="https://films.work/contact" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div class="grid-lines-bg" aria-hidden="true">
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+    <div class="grid-line-col"></div>
+  </div>
+
+  <!-- HEADER WITH LIVE CLOCKS & THEME TOGGLE -->
+  <header id="header">
+    <div class="header-logo-box">
+      <a href="index.html" class="header-logo">bhavya.</a>
+    </div>
+    <div class="header-ticker-box">
+      <div class="ticker-track">
+        <span class="ticker-item active">LIGHTS</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">CAMERA</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">ACTION</span>
+        <span class="ticker-space"></span>
+        <span class="ticker-item active">LIGHTS</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">CAMERA</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">ACTION</span>
+        <span class="ticker-space"></span>
+        <span class="ticker-item active">LIGHTS</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">CAMERA</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">ACTION</span>
+        <span class="ticker-space"></span>
+        <span class="ticker-item active">LIGHTS</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">CAMERA</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">ACTION</span>
+        <span class="ticker-space"></span>
+        <span class="ticker-item active">LIGHTS</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">CAMERA</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">ACTION</span>
+        <span class="ticker-space"></span>
+        <span class="ticker-item active">LIGHTS</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">CAMERA</span>
+        <span class="ticker-item">/</span>
+        <span class="ticker-item">ACTION</span>
+        <span class="ticker-space"></span>
+      </div>
+    </div>
+    <button type="button" id="theme-toggle" class="header-theme-toggle" aria-label="Toggle light/dark theme">
+      <span id="theme-text">LIGHT</span>
+      <span class="theme-square"></span>
+    </button>
+    <button type="button" id="menu-btn" class="header-menu-btn" aria-label="Toggle navigation drawer">
+      <div class="menu-burger-lines">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+  </header>
+
+  <!-- SLIDE-OVER NAVIGATION DRAWER (HALF PREVIEW / HALF MENU) -->
+  <div id="nav-drawer" role="dialog" aria-modal="true" aria-label="Site Navigation">
+    <!-- LEFT HALF: DYNAMIC IMAGE STAGE WITH BLUR/CROSSFADE TRANSITIONS -->
+    <div class="drawer-preview-stage">
+      <div class="drawer-preview-backdrop"></div>
+      <div class="drawer-preview-layer" data-preview="home">
+        <img src="images/hero.jpg" alt="Home preview" class="drawer-preview-img" />
+        <div class="drawer-preview-tag"><span>01</span> / HOME // MEDIA, HOSTING &amp; PRODUCTION</div>
+      </div>
+      <div class="drawer-preview-layer" data-preview="about">
+        <img src="images/about_portrait_1791400145203.jpg" alt="Bhavya Shukla portrait" class="drawer-preview-img" />
+        <div class="drawer-preview-tag"><span>02</span> / ABOUT // BJMC STUDENT &amp; ANCHOR</div>
+      </div>
+      <div class="drawer-preview-layer" data-preview="works">
+        <img src="images/work1.jpg" alt="Selected Works still" class="drawer-preview-img" />
+        <div class="drawer-preview-tag"><span>03</span> / WORKS // SHORT FILMS &amp; PARODIES</div>
+      </div>
+      <div class="drawer-preview-layer" data-preview="experience">
+        <img src="images/project1_img_1791400184057.jpg" alt="Experience on set" class="drawer-preview-img" />
+        <div class="drawer-preview-tag"><span>04</span> / EXPERIENCE // RED FM, BHARAT SAMACHAR &amp; EVENTS</div>
+      </div>
+      <div class="drawer-preview-layer" data-preview="achievements">
+        <!-- Crossfading multi-image montage with blur transition -->
+        <div class="drawer-slideshow" id="drawer-achieve-slideshow">
+          <img src="images/still1.jpg" alt="Award Still 1" class="drawer-slide-img active" />
+          <img src="images/still2.jpg" alt="Award Still 2" class="drawer-slide-img" />
+          <img src="images/still3.jpg" alt="Award Still 3" class="drawer-slide-img" />
+          <img src="images/still4.jpg" alt="Award Still 4" class="drawer-slide-img" />
+          <img src="images/still5.jpg" alt="Award Still 5" class="drawer-slide-img" />
+        </div>
+        <div class="drawer-preview-tag"><span>05</span> / HONORS // MAHE 9.6 CGPA &amp; UP GOV FELICITATION</div>
+      </div>
+      <div class="drawer-preview-layer active" data-preview="contact">
+        <img src="images/hero_portrait_1791400132911.jpg" alt="Contact Bhavya" class="drawer-preview-img" />
+        <div class="drawer-preview-tag"><span>06</span> / CONTACT // INQUIRIES &amp; COLLABORATIONS</div>
+      </div>
+    </div>
+
+    <!-- RIGHT HALF: MENU CONTROLS & LINKS -->
+    <div class="drawer-content-stage">
+      <ul class="drawer-links">
+        <li><a href="index.html" data-menu-target="home"><span class="nav-num">01</span><span
+              class="nav-text">home.</span></a></li>
+        <li><a href="about.html" data-menu-target="about"><span class="nav-num">02</span><span
+              class="nav-text">about.</span></a></li>
+        <li><a href="works.html" data-menu-target="works"><span class="nav-num">03</span><span
+              class="nav-text">works.</span></a></li>
+        <li><a href="experience.html" data-menu-target="experience"><span class="nav-num">04</span><span
+              class="nav-text">experience.</span></a></li>
+        <li><a href="achievements.html" data-menu-target="achievements"><span class="nav-num">05</span><span
+              class="nav-text">achievements.</span></a></li>
+        <li><a href="contact.html" data-menu-target="contact"><span class="nav-num">06</span><span
+              class="nav-text">contact.</span></a></li>
+      </ul>
+      <div class="drawer-footer">
+        <span>AVAILABLE FOR ROLES &amp; PROJECTS 2026</span>
+        <span>bhavya.tia@gmail.com</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="main-wrapper">
+    <section class="m-section" style="margin-top: var(--nav-h);">
+      <div class="m-section-inner">
+        <div class="m-content-col">
+          <div class="sec-header">
+            <p class="sec-eyebrow">inquiry / direct desk</p>
+            <h1 class="sec-h2 h-anim">contact.</h1>
+          </div>
+          <div class="contact-split-grid">
+            <!-- Left Info Column -->
+            <div class="contact-left-col">
+              <div>
+                <h2 class="contact-honest-title h-anim">LET'S MAKE SOMETHING REMARKABLE.</h2>
+                <p class="contact-subtext">
+                  Available for entertainment marketing, anchoring &amp; hosting, show and content production, digital
+                  storytelling, and media collaborations.
+                </p>
+                <p class="contact-direct-line">
+                  Direct Inbox: <a href="mailto:bhavya.tia@gmail.com"
+                    class="contact-direct-link">bhavya.tia@gmail.com</a>
+                </p>
+                <p class="contact-direct-line" style="margin-top: 0.6rem;">
+                  Phone: <a href="tel:+917054393618" class="contact-direct-link">+91 70543 93618</a>
+                </p>
+                <div
+                  style="font-size: 0.8rem; opacity: 0.75; text-transform: uppercase; letter-spacing: 0.12em; line-height: 1.8; margin-top: 1.2rem;">
+                  LOCATIONS: Bengaluru, Karnataka, India &middot; Open to Travel &amp; Relocation<br />
+                  EDUCATION: BJMC @ Manipal Academy of Higher Education (CGPA: 9.6)<br />
+                  RESPONSE TIME: Within 24 Business Hours
+                </div>
+              </div>
+              <div class="contact-social-icons-row">
+                <a href="https://youtube.com" target="_blank" rel="noopener" class="social-icon-btn"
+                  aria-label="YouTube channel">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                  </svg>
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon-btn"
+                  aria-label="Instagram profile">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Right Form Column -->
+            <div class="contact-form-col">
+              <form id="contact-form" novalidate>
+                <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" aria-hidden="true">
+                  <input type="text" id="hp-website" name="website" tabindex="-1" autocomplete="off" />
+                </div>
+                <div class="fg">
+                  <input type="text" id="c-name" placeholder="Your Name" required />
+                  <label for="c-name">Your Name</label>
+                </div>
+                <div class="fg" style="margin-top: 1.8rem;">
+                  <input type="email" id="c-email" placeholder="Your Email" required />
+                  <label for="c-email">Your Email</label>
+                </div>
+                <div class="fg" style="margin-top: 1.8rem;">
+                  <textarea id="c-msg" rows="3" placeholder="Project / Message" required></textarea>
+                  <label for="c-msg">Project Scope / Message</label>
+                </div>
+                <div style="margin-top: 2rem;">
+                  <button type="submit" class="btn-send-message">SEND MESSAGE</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER (CLASSIC DARK LUXURY FOOTER WITH REFINED BOTTOM STRIP) -->
+  <footer id="site-footer">
+    <div class="footer-nav-grid">
+      <a href="about.html" class="footer-nav-cell">ABOUT</a>
+      <a href="works.html" class="footer-nav-cell">WORKS</a>
+      <a href="contact.html" class="footer-nav-cell">CONTACT</a>
+    </div>
+    <div class="footer-middle-grid">
+      <div>
+        <p class="footer-subhead">ELSEWHERE</p>
+        <div class="footer-social-links">
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-link">INSTAGRAM &rarr;</a>
+          <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-link">YOUTUBE &rarr;</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener" class="footer-social-link">LINKEDIN &rarr;</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-subhead">COLOPHON</p>
+        <p style="font-size: 0.78rem; opacity: 0.8; line-height: 1.7;">
+          &copy; 2026 BHAVYA SHUKLA. ALL RIGHTS RESERVED.<br>
+          MAHE BENGALURU &middot; BJMC (CGPA: 9.6)
+        </p>
+        <div class="footer-action-links">
+          <a href="Bhavya_Shukla_CV.pdf" download="Bhavya_Shukla_CV.pdf" id="download-cv" class="footer-action-link"
+            aria-label="Download Bhavya Shukla CV">&darr; DOWNLOAD CV</a>
+          <a href="https://1drv.ms/f/c/all-content" target="_blank" rel="noopener noreferrer" id="onedrive-link" class="footer-action-link"
+            aria-label="View all media, videos and content archive on OneDrive">&nearr; ONEDRIVE ARCHIVE</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-big-crop-wrap">
+      <div class="footer-crowd-canvas-wrap" aria-hidden="true"></div>
+    </div>
+  </footer>
+
+  <script src="data/content.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/footer-bhavya.js"></script>
+  <script src="js/footer-crowd.js"></script>
+</body>
+
+</html>
