@@ -1,6 +1,3 @@
-[tool.vercel]
-entrypoint = "api.contact:handler"
-
 [project]
 name = "bhavya-portfolio"
 version = "1.0.0"
