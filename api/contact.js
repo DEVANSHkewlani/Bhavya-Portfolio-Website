@@ -28,7 +28,7 @@ module.exports = async function handler(req, res) {
         const { data, error } = await client.emails.send({
             from: process.env.RESEND_FROM || 'Portfolio Contact <onboarding@resend.dev>',
             to: [process.env.RECIPIENT_EMAIL || 'bhavya.tia@gmail.com'],
-            reply_to: email,
+            replyTo: email,
             subject: `New inquiry from ${name}`,
             html: `<h2>New portfolio inquiry</h2><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong></p><p>${message.replace(/\n/g, '<br>')}</p>`,
             text: `From: ${name} <${email}>\n\n${message}`,
