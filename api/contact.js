@@ -25,7 +25,7 @@ module.exports = async function handler(req, res) {
 
     try {
         const client = new resend.Resend(process.env.RESEND_API_KEY);
-        await client.emails.send({
+        const { data, error } = await client.emails.send({
             from: process.env.RESEND_FROM || 'Portfolio Contact <onboarding@resend.dev>',
             to: [process.env.RECIPIENT_EMAIL || 'bhavya.tia@gmail.com'],
             reply_to: email,
@@ -33,6 +33,7 @@ module.exports = async function handler(req, res) {
             html: `<h2>New portfolio inquiry</h2><p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong></p><p>${message.replace(/\n/g, '<br>')}</p>`,
             text: `From: ${name} <${email}>\n\n${message}`,
         });
+        if (error) throw new Error(JSON.stringify(error));
         return res.status(200).json({ ok: true });
     } catch (e) {
         console.error('Email error:', e);
